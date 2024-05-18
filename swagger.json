@@ -1,0 +1,988 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Expense Manager API",
+    "description": "Specification for node.js-express.js API server of Expense Manager App.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.expensemanager.biz.id/api/v1",
+      "description": "Production server"
+    },
+    {
+      "url": "http://localhost:3500/api/v1",
+      "description": "Development server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authorization",
+      "description": "Authorization to get into Expense Manager app"
+    },
+    {
+      "name": "Users",
+      "description": "Users info and data"
+    },
+    {
+      "name": "Expenses",
+      "description": "Expense category operation"
+    },
+    {
+      "name": "Incomes",
+      "description": "Income category operation"
+    },
+    {
+      "name": "Accounts",
+      "description": "Account operation"
+    },
+    {
+      "name": "Transactions",
+      "description": "Transaction operation"
+    }
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "summary": "Add a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Authorization"
+        ]
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Log a user into app",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Authorization"
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "Find a user info",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Users"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update a user info",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_name": {
+                    "type": "string",
+                    "description": "User name"
+                  },
+                  "user_email": {
+                    "type": "string",
+                    "description": "User email"
+                  },
+                  "user_password": {
+                    "type": "string",
+                    "description": "User password"
+                  }
+                },
+                "required": [
+                  "expense_name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Users"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a user info and data",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Users"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/expenses": {
+      "get": {
+        "summary": "Find all expense category",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Expenses"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Expenses"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Add a new expense category",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expense_name": {
+                    "type": "string",
+                    "description": "Expense name"
+                  }
+                },
+                "required": [
+                  "expense_name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Expenses"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/expenses/{id}": {
+      "put": {
+        "summary": "Update an expense category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Expense id to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expense_name": {
+                    "type": "string",
+                    "description": "Expense name"
+                  }
+                },
+                "required": [
+                  "expense_name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Expenses"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete an expense category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Expense id to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "Expenses"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/incomes": {
+      "get": {
+        "summary": "Find all income category",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Incomes"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Incomes"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Add a new income category",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "income_name": {
+                    "type": "string",
+                    "description": "Income name"
+                  }
+                },
+                "required": [
+                  "income_name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Incomes"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/incomes/{id}": {
+      "put": {
+        "summary": "Update an income category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Income id to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "income_name": {
+                    "type": "string",
+                    "description": "Income name"
+                  }
+                },
+                "required": [
+                  "income_name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Incomes"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete an income category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Income id to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "Incomes"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/accounts": {
+      "get": {
+        "summary": "Find all accounts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Accounts"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Accounts"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Add a new account",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "account_name": {
+                    "type": "string",
+                    "description": "Account name"
+                  }
+                },
+                "required": [
+                  "account_name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Accounts"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/accounts/{id}": {
+      "put": {
+        "summary": "Update an account",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Account id to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "account_name": {
+                    "type": "string",
+                    "description": "Account name"
+                  }
+                },
+                "required": [
+                  "account_name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Accounts"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete an account",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Account id to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "Accounts"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/transactions": {
+      "get": {
+        "summary": "Find all transactions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Transactions"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Add a new transaction",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transaction_date": {
+                    "type": "string",
+                    "description": "Transaction timestamp"
+                  },
+                  "id_account": {
+                    "type": "string",
+                    "description": "Account id used"
+                  },
+                  "id_income": {
+                    "type": "string",
+                    "description": "Income id used (if income)"
+                  },
+                  "id_expense": {
+                    "type": "string",
+                    "description": "Expense id used (if expense)"
+                  },
+                  "id_transfer": {
+                    "type": "string",
+                    "description": "Account id used (if transfer)"
+                  },
+                  "transaction_amount": {
+                    "type": "number",
+                    "description": "Amount used"
+                  },
+                  "transaction_note": {
+                    "type": "string",
+                    "description": "Transaction notes"
+                  },
+                  "transaction_bill": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Transaction bill image"
+                  }
+                },
+                "required": [
+                  "transaction_date",
+                  "id_account",
+                  "id_income",
+                  "id_expense",
+                  "id_transfer",
+                  "transaction_amount"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Transactions"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/transaction/{id}": {
+      "put": {
+        "summary": "Update a transaction",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Transaction id to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transaction_date": {
+                    "type": "string",
+                    "description": "Transaction timestamp"
+                  },
+                  "id_account": {
+                    "type": "string",
+                    "description": "Account id used"
+                  },
+                  "id_income": {
+                    "type": "string",
+                    "description": "Income id used (if income)"
+                  },
+                  "id_expense": {
+                    "type": "string",
+                    "description": "Expense id used (if expense)"
+                  },
+                  "id_transfer": {
+                    "type": "string",
+                    "description": "Account id used (if transfer)"
+                  },
+                  "transaction_amount": {
+                    "type": "number",
+                    "description": "Amount used"
+                  },
+                  "transaction_note": {
+                    "type": "string",
+                    "description": "Transaction notes"
+                  },
+                  "transaction_bill": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Transaction bill image"
+                  }
+                },
+                "required": [
+                  "id_income",
+                  "id_expense",
+                  "id_transfer"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Transactions"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Transactions"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a transaction",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Transaction id to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "Transactions"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Register": {
+        "type": "object",
+        "properties": {
+          "user_name": {
+            "type": "string"
+          },
+          "user_email": {
+            "type": "string"
+          },
+          "user_password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "user_name": "Guest",
+          "user_email": "guest@mail.com",
+          "user_password": "12345"
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "user_email": {
+            "type": "string"
+          },
+          "user_password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "user_email": "guest@mail.com",
+          "user_password": "12345"
+        }
+      },
+      "Users": {
+        "type": "object",
+        "properties": {
+          "user_name": {
+            "type": "string"
+          },
+          "user_email": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "user_name": "Guest",
+          "user_email": "guest@mail.com"
+        }
+      },
+      "Expenses": {
+        "type": "object",
+        "properties": {
+          "expense_id": {
+            "type": "string"
+          },
+          "expense_name": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "expense_id": "1234-abcd-5678-efgh",
+          "expense_name": "Shopping"
+        }
+      },
+      "Incomes": {
+        "type": "object",
+        "properties": {
+          "income_id": {
+            "type": "string"
+          },
+          "income_name": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "income_id": "1234-abcd-5678-efgh",
+          "income_name": "Salary"
+        }
+      },
+      "Accounts": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "account_name": {
+            "type": "string"
+          },
+          "account_balance": {
+            "type": "number"
+          }
+        },
+        "example": {
+          "account_id": "1234-abcd-5678-efgh",
+          "account_name": "BNI",
+          "account_balance": 256000
+        }
+      },
+      "Transactions": {
+        "type": "object",
+        "properties": {
+          "transaction_id": {
+            "type": "string"
+          },
+          "transaction_date": {
+            "type": "string"
+          },
+          "id_account": {
+            "type": "string"
+          },
+          "id_income": {
+            "type": "string"
+          },
+          "id_expense": {
+            "type": "string"
+          },
+          "id_transfer": {
+            "type": "string"
+          },
+          "transaction_amount": {
+            "type": "number"
+          },
+          "transaction_note": {
+            "type": "string"
+          },
+          "transaction_bill": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "transaction_id": "1234-abcd-5678-efgh",
+          "transaction_date": "2023-12-31T23:59",
+          "id_account": "1234-abcd-5678-efgh",
+          "id_income": "",
+          "id_expense": "1234-abcd-5678-efgh",
+          "id_transfer": "",
+          "transaction_amount": 2048000,
+          "transaction_note": "Buy grocery for a month",
+          "transaction_bill": "https://res.cloudinary.com/abcd/image/upload/v1234/expense_manager/efgh-5678_i9j0"
+        }
+      }
+    }
+  }
+}
