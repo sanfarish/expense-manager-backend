@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { authorization, fileUpload } = require('../middlewares');
+const authorization = require('../middlewares/authorization');
+const fileUpload = require('../middlewares/fileUpload');
 const transaction = require('../controllers/transactions');
 const account = require('../controllers/accounts');
 const income = require('../controllers/incomes');

@@ -1,52 +1,6 @@
-const jwt = require('jsonwebtoken');
-const { body, validationResult } = require('express-validator');
 const multer = require('multer');
 
-// JWT Authorization
-exports.authorization = (req, res, next) => {
-	const bearerToken = req.get('Authorization');
-	if (!bearerToken) {
-		res.status(401).json({
-			message: 'authorization required'
-		});
-	} else {
-		const token =  bearerToken.split(' ')[1];
-		if (token === null) {
-			res.status(401).json({
-				message: 'authorization required'
-			});
-		} else {
-			try {
-				const payload = jwt.verify(token, process.env.ACCESS_SECRET_TOKEN);
-				req.userid = payload.user_id;
-				next();
-			} catch (err) {
-				res.status(401).json({
-					message: 'authorization required'
-				});
-			};
-		};
-	};
-};
-
-// Express Validator
-exports.validator = [
-	body('user_email').isEmail()
-];
-
-exports.validEmail = (req, res, next) => {
-	const errors = validationResult(req);
-	if (errors.errors.length !== 0) {
-		res.status(401).json({
-			message: 'Email not valid!'
-		});
-	} else {
-		next();
-	};
-};
-
-// Multer
-exports.fileUpload = (file) => {
+const fileUpload = (file) => {
 
 	const storage = multer.diskStorage({
 		destination: function (req, file, cb) {
@@ -112,9 +66,4 @@ exports.fileUpload = (file) => {
 	};
 };
 
-// Not Found response
-exports.notFound = ((req, res, next) => {
-	res.status(404).json({
-		message: 'not found'
-	});
-});
+module.exports = fileUpload;

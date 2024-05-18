@@ -7,7 +7,7 @@ const swaggerJSON = require('./swagger.json');
 const swaggerUI = require('swagger-ui-express');
 const dataRoute = require('./src/routes/data');
 const authRoute = require('./src/routes/auth');
-const { notFound } = require('./src/middlewares');
+const notFound = require('./src/middlewares/notFound');
 
 app.use(express.json({
     verify: (req, res, buf, encoding) => {
