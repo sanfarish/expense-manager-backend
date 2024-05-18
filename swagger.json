@@ -57,7 +57,13 @@
         },
         "responses": {
           "201": {
-            "description": "OK"
+            "description": "Successfully registered"
+          },
+          "400": {
+            "description": "Error, Fill all required input"
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -80,7 +86,13 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully logged in"
+          },
+          "400": {
+            "description": "Error, Fill all required input"
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -104,6 +116,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -146,7 +161,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "User successfully updated",
             "content": {
               "application/json": {
                 "schema": {
@@ -157,6 +172,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -172,17 +190,10 @@
         "summary": "Delete a user info and data",
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Users"
-                  }
-                }
-              }
-            }
+            "description": "User successfully deleted"
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -211,6 +222,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -245,7 +259,10 @@
         },
         "responses": {
           "201": {
-            "description": "OK"
+            "description": "Expense successfully added"
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -293,7 +310,10 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Expense successfully updated"
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -319,8 +339,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Expense successfully deleted"
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -349,6 +372,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -383,7 +409,10 @@
         },
         "responses": {
           "201": {
-            "description": "OK"
+            "description": "Income successfully added"
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -431,7 +460,10 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Income successfully updated"
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -457,8 +489,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Income successfully deleted"
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -487,6 +522,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -521,7 +559,10 @@
         },
         "responses": {
           "201": {
-            "description": "OK"
+            "description": "Account successfully added"
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -569,7 +610,10 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Account successfully updated"
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -595,8 +639,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Account successfully deleted"
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -625,6 +672,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -693,7 +743,7 @@
         },
         "responses": {
           "201": {
-            "description": "OK",
+            "description": "Transaction successfully added",
             "content": {
               "application/json": {
                 "schema": {
@@ -704,6 +754,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -782,7 +835,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Transaction successfully updated",
             "content": {
               "application/json": {
                 "schema": {
@@ -793,6 +846,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
@@ -818,8 +874,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Transaction successfully deleted"
+          },
+          "500": {
+            "description": "Error, Internal server"
           }
         },
         "tags": [
