@@ -31,7 +31,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          port: 22
+          port: 30103
           script: |
             cd ~/EMserver
             git pull origin main
