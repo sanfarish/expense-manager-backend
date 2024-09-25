@@ -31,12 +31,12 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          port: 30103
+          port: 22
           script: |
-            cd ~/EMserver
+            cd ~/expense-manager-backend
             git pull origin main
             git status
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             npm install
-            pm2 restart api-main
+            pm2 restart expense-manager

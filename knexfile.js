@@ -10,7 +10,7 @@ module.exports = {
       port : 5432,
       user : 'postgres',
       password : 'admin',
-      database : 'postgres'
+      database : 'expense_manager'
     }
   },
 

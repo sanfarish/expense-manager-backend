@@ -24,6 +24,10 @@ app.use(express.json({
 app.use(cors());
 app.use(morgan('dev'));
 
+app.get('/', (req, res) => {
+    res.status(301).redirect('/api/v1/docs');
+});
+
 app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerJSON));
 
 // app.use('/api/v1', adminRoute);
@@ -34,5 +38,5 @@ app.use('/api/v1', dataRoute);
 
 app.use('*', notFound);
 
-const port = process.env.PORT || 3500;
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log("Expense Manager API Server running on port", port));
